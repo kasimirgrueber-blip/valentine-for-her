@@ -7,8 +7,8 @@
 <style>
   :root {
     --apple-red: #c83a3a;
-    --soft-gray: #e5e5ea;
-    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --text-dark: #1c1c1e;
   }
 
   body {
@@ -25,22 +25,22 @@
   .card {
     width: 520px;
     height: 320px;
-    backdrop-filter: blur(18px);
     background: var(--glass-bg);
+    backdrop-filter: blur(20px);
     border-radius: 22px;
     box-shadow:
       0 20px 40px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.6);
+      inset 0 1px 0 rgba(255,255,255,0.7);
     text-align: center;
     position: relative;
-    padding-top: 50px;
+    padding-top: 55px;
   }
 
   h1 {
-    font-weight: 500;
     font-size: 30px;
-    color: #1c1c1e;
-    margin-bottom: 70px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 80px;
   }
 
   button {
@@ -49,7 +49,11 @@
     border-radius: 14px;
     cursor: pointer;
     position: absolute;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: 
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      left 0.15s ease,
+      top 0.15s ease;
   }
 
   #yesBtn {
@@ -79,7 +83,7 @@
 
 <body>
   <div class="card">
-    <h1>Do you wanna be my Valentine?</h1>
+    <h1>Valerie, do you wanna be my Valentine?</h1>
     <button id="yesBtn" onclick="goYes()">Yes</button>
     <button id="noBtn">No</button>
   </div>
@@ -88,25 +92,43 @@
   const noBtn = document.getElementById("noBtn");
   const card = document.querySelector(".card");
 
-  noBtn.addEventListener("mouseenter", () => {
+  function moveNoButton() {
     const cardRect = card.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
 
-    const maxX = cardRect.width - btnRect.width - 20;
-    const maxY = cardRect.height - btnRect.height - 20;
+    const padding = 20;
+    const maxX = cardRect.width - btnRect.width - padding;
+    const maxY = cardRect.height - btnRect.height - padding;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const x = Math.random() * maxX + padding / 2;
+    const y = Math.random() * maxY + padding / 2;
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
     noBtn.style.right = "auto";
     noBtn.style.bottom = "auto";
+  }
+
+  // Escape immediately on hover
+  noBtn.addEventListener("mouseenter", moveNoButton);
+
+  // Escape if cursor gets close
+  card.addEventListener("mousemove", (e) => {
+    const btnRect = noBtn.getBoundingClientRect();
+    const distance = Math.hypot(
+      e.clientX - (btnRect.left + btnRect.width / 2),
+      e.clientY - (btnRect.top + btnRect.height / 2)
+    );
+
+    if (distance < 90) {
+      moveNoButton();
+    }
   });
 
   function goYes() {
     window.location.href = "yes.html";
   }
 </script>
+
 </body>
 </html>
