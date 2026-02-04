@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Valentine?</title>
+
+<style>
+  :root {
+    --apple-red: #c83a3a;
+    --soft-gray: #e5e5ea;
+    --glass-bg: rgba(255, 255, 255, 0.55);
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #dfe3ea, #f5f6fa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Segoe UI", sans-serif;
+  }
+
+  .card {
+    width: 520px;
+    height: 320px;
+    backdrop-filter: blur(18px);
+    background: var(--glass-bg);
+    border-radius: 22px;
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    text-align: center;
+    position: relative;
+    padding-top: 50px;
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 30px;
+    color: #1c1c1e;
+    margin-bottom: 70px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 14px 36px;
+    border-radius: 14px;
+    cursor: pointer;
+    position: absolute;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #yesBtn {
+    left: 120px;
+    bottom: 45px;
+    background: var(--apple-red);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(200, 58, 58, 0.35);
+  }
+
+  #yesBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(200, 58, 58, 0.45);
+  }
+
+  #noBtn {
+    right: 120px;
+    bottom: 45px;
+    background: transparent;
+    color: var(--apple-red);
+    border: 2px solid var(--apple-red);
+    backdrop-filter: blur(6px);
+  }
+</style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Do you wanna be my Valentine?</h1>
+    <button id="yesBtn" onclick="goYes()">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const card = document.querySelector(".card");
+
+  noBtn.addEventListener("mouseenter", () => {
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = cardRect.width - btnRect.width - 20;
+    const maxY = cardRect.height - btnRect.height - 20;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.right = "auto";
+    noBtn.style.bottom = "auto";
+  });
+
+  function goYes() {
+    window.location.href = "yes.html";
+  }
+</script>
+</body>
+</html>
