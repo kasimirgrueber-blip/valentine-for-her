@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>She Said Yes ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #f6d1d1, #fdeaea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    padding: 50px 60px;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    animation: fadeIn 1.2s ease;
+  }
+
+  h1 {
+    color: #c83a3a;
+    font-size: 34px;
+    font-weight: 500;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.4;
+    animation: float 8s linear infinite;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+    }
+    to {
+      transform: translateY(-10vh);
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>You have accepted to be<br>Kasimir’s Valentine ❤️</h1>
+  </div>
+
+<script>
+  for (let i = 0; i < 18; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+    heart.style.fontSize = 14 + Math.random() * 18 + "px";
+    document.body.appendChild(heart);
+  }
+</script>
+</body>
+</html>
