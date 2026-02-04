@@ -5,79 +5,146 @@
 <title>She Said Yes ❤️</title>
 
 <style>
+  :root {
+    --apple-red: #c83a3a;
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --soft-pink: #fdeaea;
+    --text-dark: #1c1c1e;
+  }
+
   body {
     margin: 0;
     height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
                  "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #f6d1d1, #fdeaea);
+    background: radial-gradient(circle at top, #fff, var(--soft-pink));
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
 
+  /* Soft romantic glow */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(200, 58, 58, 0.15), transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(255, 120, 150, 0.18), transparent 45%);
+    pointer-events: none;
+  }
+
   .card {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(20px);
-    padding: 50px 60px;
-    border-radius: 26px;
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px);
+    padding: 55px 65px;
+    border-radius: 28px;
     text-align: center;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-    animation: fadeIn 1.2s ease;
+    box-shadow:
+      0 30px 60px rgba(0,0,0,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    animation: popIn 1.1s ease;
   }
 
   h1 {
-    color: #c83a3a;
+    color: var(--apple-red);
     font-size: 34px;
     font-weight: 500;
+    margin: 0;
+    line-height: 1.25;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  p {
+    margin-top: 18px;
+    font-size: 18px;
+    color: var(--text-dark);
+    opacity: 0.8;
   }
 
   /* Floating hearts */
   .heart {
     position: absolute;
-    font-size: 20px;
-    opacity: 0.4;
-    animation: float 8s linear infinite;
+    font-size: 18px;
+    opacity: 0.35;
+    animation: floatUp linear infinite;
+    pointer-events: none;
   }
 
-  @keyframes float {
+  @keyframes floatUp {
     from {
-      transform: translateY(100vh);
+      transform: translateY(100vh) scale(0.8);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.4;
     }
     to {
-      transform: translateY(-10vh);
+      transform: translateY(-15vh) scale(1.2);
+      opacity: 0;
     }
+  }
+
+  @keyframes popIn {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Subtle sparkle */
+  .sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: sparkle 4s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.6; }
   }
 </style>
 </head>
 
 <body>
+
   <div class="card">
     <h1>You have accepted to be<br>Kasimir’s Valentine ❤️</h1>
+    <p>Today just became a little more special.</p>
   </div>
 
 <script>
-  for (let i = 0; i < 18; i++) {
+  // Floating hearts
+  for (let i = 0; i < 24; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
-    heart.innerHTML = "❤️";
+    heart.textContent = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-    heart.style.fontSize = 14 + Math.random() * 18 + "px";
+    heart.style.fontSize = 14 + Math.random() * 20 + "px";
+    heart.style.animationDelay = Math.random() * 4 + "s";
     document.body.appendChild(heart);
   }
+
+  // Soft sparkles
+  for (let i = 0; i < 12; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.style.animationDelay = Math.random() * 4 + "s";
+    document.body.appendChild(sparkle);
+  }
 </script>
+
 </body>
 </html>
